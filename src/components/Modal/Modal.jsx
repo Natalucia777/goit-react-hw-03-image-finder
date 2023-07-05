@@ -1,6 +1,20 @@
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+class Modal extends Component {
+  state = {
 
-<div class="overlay">
-  <div class="modal">
-    <img src="" alt="" />
+  };
+  render() {
+  <div class="overlay">
+    <div class="modal">
+      <img src="" alt="" />
+    </div>
   </div>
-</div>
+  }
+}
+
+Modal.propTypes = {
+  ,
+};
+
+export default Modal;
