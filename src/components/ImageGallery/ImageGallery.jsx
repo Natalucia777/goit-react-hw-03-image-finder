@@ -1,14 +1,25 @@
-import React from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-
+import shortid from 'shortid';
 import ImageGalleryItem from './ImageGalleryItem/ImageGalleryItem';
+import Modal from './Modal/Modal';
 
-function ImageGallery() {
-  return (
-    <ul class="gallery">
-      <ImageGalleryItem />
-         </ul>
-  );
+class ImageGallery extends Component {
+  state = {
+    showModal: false,
+    showImage: null,
+  };
+
+  render() {
+    return (
+      <div>
+        <ul class="gallery">
+          <ImageGalleryItem key={shortid.generate()} />
+        </ul>
+        <Modal />
+      </div>
+    );
+  }
 }
 
 ImageGallery.propTypes = {
