@@ -11,12 +11,19 @@ class ImageGallery extends Component {
   };
 
   render() {
+    const { showModal, showImage } = this.state;
     return (
       <div>
         <ul class="gallery">
-          <ImageGalleryItem key={shortid.generate()} />
+          <ImageGalleryItem
+            key={shortid.generate()}
+            imageUrl={ }
+            id={ }
+          />
         </ul>
-        <Modal />
+        if ({showModal && showImage}) {
+          <Modal image={ this.showImage } />
+        }
       </div>
     );
   }

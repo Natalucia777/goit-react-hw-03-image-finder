@@ -9,10 +9,10 @@ class Modal extends Component {
   // };
 
   render() {
-    retutn createPortal(
+    return createPortal(
       <div class="overlay">
         <div class="modal">
-          <img src="{ }" alt="" />
+          <img src={this.props.image} alt="" />
         </div>
       </div>,
       modalRoot
@@ -21,7 +21,7 @@ class Modal extends Component {
 }
 
 Modal.propTypes = {
-  ,
+  image: PropTypes.string.isRequired,
 };
 
 export default Modal;
