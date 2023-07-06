@@ -1,23 +1,19 @@
-import React from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-
-function ImageGalleryItem() {
-  return (
+class ImageGalleryItem extends Component {
+  render() {
+    return (
     <li class="gallery-item">
-  <img src="" alt="" />
-</li>
+      <img src={this.props.imageUrl} alt={this.props.id} />
+    </li>
   );
+  }
+  
 }
 
 ImageGalleryItem.propTypes = {
-  contacts: PropTypes.arrayOf(
-    PropTypes.shape({
-      id: PropTypes.string.isRequired,
-      name: PropTypes.string.isRequired,
-      number: PropTypes.string.isRequired,
-    })
-  ),
-  onDelete: PropTypes.func.isRequired,
+      id: PropTypes.number.isRequired,
+      imageUrl: PropTypes.string.isRequired,
 };
 
 export default ImageGalleryItem;
