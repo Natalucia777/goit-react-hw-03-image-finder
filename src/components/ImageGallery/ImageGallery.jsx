@@ -10,6 +10,9 @@ class ImageGallery extends Component {
     showImage: null,
   };
 
+
+
+  
   render() {
     const { showModal, showImage } = this.state;
     return (

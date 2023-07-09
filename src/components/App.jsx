@@ -8,21 +8,25 @@ import ImageGalleryItem from './ImageGalleryItem/ImageGalleryItem';
 import Loader from './Loader/Loader';
 import Modal from './Modal/Modal';
 import Searchbar from './Searchbar/Searchbar';
+import { AppBox } from './App.styled';
+import { ErrorMessage } from './App.styled';
+
 
 
 const BASE_URL = axios.defaults.baseURL = "https://pixabay.com/api";
 const API_KEY = '36094261-707a3f1df60011e058a78caa9';
 const quantityPage = 12;
+
 async function getComponentImages (query, page, loading) {
     const response = await axios.get(BASE_URL, {
       loading,
       params: {
         key: API_KEY,
-        query,
-        imageType: 'photo',
+        q: query,
+        image_type: 'photo',
         orientation: 'horizontal',
-        quantityPage: quantityPage,
-        page,
+        per_page: quantityPage,
+        page: page,
       },
     });
     return response.data;
@@ -30,17 +34,17 @@ async function getComponentImages (query, page, loading) {
 class App extends Component {
    abortCtrl;
   state = {
-    URL: 'https://pixabay.com/api',
-    API_KEY: '36094261-707a3f1df60011e058a78caa9',
+    // URL: 'https://pixabay.com/api',
+    // API_KEY: '36094261-707a3f1df60011e058a78caa9',
     pictures: [],
     query: '',
     currentPage: 1,
     quantityPage: 12,
-      error: '',
+    error: '',
     isLoading: false,
     isLastPage: false,
   };
-  
+
   async componentDidMount() {
     const response = await axios.get("/search?query=react");
     this.setState({ articles: response.data.hits });
@@ -68,15 +72,15 @@ class App extends Component {
         currentPage,
         this.abortCtrl.loading
       );
-      if (data.hits.length === 0) {
+    if (data.hits.length === 0) {
         return toast.info('No search images and photos.', {
           position: toast.POSITION.TOP_RIGHT,
         });
       } 
       this.setState(prevState => ({
-        images: [...prevState.images, ...data.hits],
+        pictures: [...prevState.pictures, ...data.hits],
         isLastPage:
-          prevState.images.length + data.hits.length >= data.totalHits,
+          prevState.pictures.length + data.hits.length >= data.totalHits,
         error: null,
       }));
     } catch (error) {
@@ -87,7 +91,7 @@ class App extends Component {
       this.setState({ isLoading: false });
     }
   };
-  
+
   handleSubmit = query => {
     if (this.state.query === query) {
       return;
@@ -109,27 +113,30 @@ class App extends Component {
 render() {
   const { pictures, isLoading, error, isLastPage } = this.state;
     return (
-      <div
-      style={{
-        height: '100vh',
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center',
-        fontSize: 40,
-        color: '#010101'
-      }}
+      <AppBox
+      // style={{
+      //   height: '100vh',
+      //   display: 'flex',
+      //   justifyContent: 'center',
+      //   alignItems: 'center',
+      //   fontSize: 40,
+      //   color: '#010101'
+      // }}
       >
-        <Searchbar onSubmit={this.handleSearchSubmit} />
-        {error && <Error>Error: {error}</Error>}
-          <ImageGallery images={pictures} />
-       {!isLoading && images.length > 0 && !isLastPage && (
-          <Button onClick={this.loadMore} />)}
-         {isLoading && <Loader />}
+        <Searchbar
+          onSubmit={this.handleSubmit} />
+        {error && <ErrorMessage>
+          Error: {error}
+        </ErrorMessage>}
+        <ImageGallery
+          pictures={pictures} />
+        {!isLoading && pictures.length > 0 && !isLastPage && (
+        <Button onClick={this.loadMore} />)}
+        {isLoading && <Loader />}
         <ToastContainer
           position="top-right"
-          autoClose={5000}
-       />
-      </div>
+          autoClose={3000} />
+      </AppBox>
     );
   }
 }
