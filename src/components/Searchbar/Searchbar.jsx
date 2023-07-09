@@ -21,23 +21,25 @@ class Searchbar extends Component {
   }
 
   render() {
-    <header class="searchbar">
-      <form class="form" onSubmit={this.handleSubmit}>
-        <button type="submit" class="button">
-          <span class="button-label">Search</span>
-        </button>
+      return (
+      <header class="searchbar">
+        <form class="form" onSubmit={this.handleSubmit}>
+          <button type="submit" class="button">
+            <span class="button-label">Search</span>
+          </button>
 
-        <input
-          class="input"
-          type="text"
-          autocomplete="off"
-          autofocus
-          placeholder="Search images and photos"
-          onImput={this.handleChange}
-          value = {this.state.quary}
-        />
-      </form>
-    </header>;
+          <input
+            class="input"
+            type="text"
+            autocomplete="off"
+            autofocus
+            placeholder="Search images and photos"
+            onImput={this.handleChange}
+            value = {this.state.quary}
+          />
+        </form>
+        </header>
+      );
   }
 }
 

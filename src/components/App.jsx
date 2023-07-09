@@ -47,7 +47,7 @@ class App extends Component {
 
   async componentDidMount() {
     const response = await axios.get("/search?query=react");
-    this.setState({ articles: response.data.hits });
+    this.setState({ pictures: response.data.hits });
   }
 
   componentDidUpdate(prevProps, prevState) {
@@ -113,16 +113,7 @@ class App extends Component {
 render() {
   const { pictures, isLoading, error, isLastPage } = this.state;
     return (
-      <AppBox
-      // style={{
-      //   height: '100vh',
-      //   display: 'flex',
-      //   justifyContent: 'center',
-      //   alignItems: 'center',
-      //   fontSize: 40,
-      //   color: '#010101'
-      // }}
-      >
+      <AppBox>
         <Searchbar
           onSubmit={this.handleSubmit} />
         {error && <ErrorMessage>

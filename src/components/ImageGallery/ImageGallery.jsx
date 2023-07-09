@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import shortid from 'shortid';
-import ImageGalleryItem from './ImageGalleryItem/ImageGalleryItem';
-import Modal from './Modal/Modal';
+import ImageGalleryItem from '../ImageGalleryItem/ImageGalleryItem';
+import Modal from '../Modal/Modal';
 
 class ImageGallery extends Component {
   state = {
@@ -10,22 +10,41 @@ class ImageGallery extends Component {
     showImage: null,
   };
 
-
-
-  
+  componentDidMount() {
+  document.addEventListener('click', e => {
+      if (e.target.nodeName !== 'IMG') {
+        this.setState({ showModal: false });
+        return;
+      } else {
+        let picture = this.props.pictures.filter(obj => {
+          return obj.id === parseInt(e.target.alt);
+        });
+        this.setState({ showImage: picture[0].largeImageURL });
+      }
+    });
+} 
+  toggleModal = () => {
+    this.setState(({ showModal }) => ({ showModal: !showModal }));
+  };
   render() {
     const { showModal, showImage } = this.state;
     return (
       <div>
-        <ul class="gallery">
+        <ul
+          class="gallery"
+          onClick={this.toggleModal}>
+          {this.props.pictures.map(img => {
+            return (  
           <ImageGalleryItem
             key={shortid.generate()}
-            imageUrl={ }
-            id={ }
-          />
+            smallImgURL={img.webformatURL}
+            id={img.id}
+              />
+            );
+          })}
         </ul>
         if ({showModal && showImage}) {
-          <Modal image={ this.showImage } />
+          <Modal onClose={this.toggleModal}  image={this.showImage } />
         }
       </div>
     );
@@ -33,14 +52,13 @@ class ImageGallery extends Component {
 }
 
 ImageGallery.propTypes = {
-  contacts: PropTypes.arrayOf(
+  pictures: PropTypes.arrayOf(
     PropTypes.shape({
       id: PropTypes.string.isRequired,
-      name: PropTypes.string.isRequired,
-      number: PropTypes.string.isRequired,
+      largeImageURL: PropTypes.string.isRequired,
+      webformatURL: PropTypes.string.isRequired,
     })
   ),
-  onDelete: PropTypes.func.isRequired,
 };
 
 export default ImageGallery;
