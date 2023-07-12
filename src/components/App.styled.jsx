@@ -7,10 +7,10 @@ export const AppBox = styled.div`
   padding-bottom: 24px;
 `;
 
-export const ErrorMessage = styled.p`
-  padding-top: 50px;
-  text-align: center;
-  font-size: 20px;
-  border: none;
-  outline: none;
-`;
+// export const ErrorMessage = styled.p`
+//   padding-top: 50px;
+//   text-align: center;
+//   font-size: 20px;
+//   border: none;
+//   outline: none;
+// `;
