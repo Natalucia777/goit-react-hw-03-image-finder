@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { ToastContainer, toast } from 'react-toastify';
-import * as API from '../Api/Api'
+import * as API from './api';
+//import getComponentImages from './Api';
 import 'react-toastify/dist/ReactToastify.css';
 // import axios from 'axios';
 import Button from './Button/Button';
@@ -10,7 +11,8 @@ import Loader from './Loader/Loader';
 // import Modal from './Modal/Modal';
 import Searchbar from './Searchbar/Searchbar';
 import { AppBox } from './App.styled';
-// import { ErrorMessage } from './App.styled';
+import { ErrorMessage, Text } from './App.styled';
+
 class App extends Component {
   //  abortCtrl;
   state = {
@@ -34,30 +36,30 @@ class App extends Component {
     }
   }
 
-  async getPictures(query, currentPage) {
+  getPictures = async (query, currentPage) => {
     this.setState({ isLoading: true, error: null });
     try {
-      const { hits, totalHits } = await API.getComponentImages(query, page);
-      if (data.hits.length === 0) {
+      const { hits, totalHits } = await API.getComponentImages(query, currentPage);
+      if (hits.length === 0) {
         this.setState({ isEmpty: true });
         return toast.info('No search images and photos.', {
           position: toast.POSITION.TOP_RIGHT,
         });
       } 
       this.setState(prevState => ({
-        pictures: [...prevState.pictures, ...data.hits],
-        page,
-        isShowBtn: page < Math.ceil(totalHits / this.state.quantityPage),
+        pictures: [...prevState.pictures, ...hits],
+        currentPage,
+        isShowBtn: currentPage < Math.ceil(totalHits / this.state.quantityPage),
         error: null,
       }));
     } catch (error) {
       if (error.code !== 'ERR_CANCELED') {
-        this.setState({ error: 'Please, reloading the page!' });
+        this.setState({ error: 'Please, reloading the page!', });
       }
     } finally {
       this.setState({ isLoading: false });
     }
-  };
+};
 
   handleSubmit = query => {
     if (this.state.query === query) {
@@ -87,13 +89,11 @@ render() {
         <Searchbar
           onSubmit={this.handleSubmit} />
         {isEmpty && <Text>Please, reloading the page!</Text>}
-
+        {isLoading && <Loader />}
         <ImageGallery
           pictures={pictures} />
-        
-        { isShowBtn && <Button onClick={this.loadMore} /> }
-        {isLoading && <Loader />}
-        
+        {isShowBtn && <Button onClick={this.loadMore} />}
+        {error && <ErrorMessage>{error}</ErrorMessage>}
         <ToastContainer
           position="top-right"
           autoClose={3000} />

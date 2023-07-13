@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { SearchHeader, SearchForm, FormInput, SearchFormButton, ButtonLabel } from './Searchbar.styled';
 
 const notify = () => toast("Please, enter your query!");
 class Searchbar extends Component {
@@ -22,14 +23,13 @@ class Searchbar extends Component {
 
   render() {
       return (
-      <header class="searchbar">
-        <form class="form" onSubmit={this.handleSubmit}>
-          <button type="submit" class="button">
-            <span class="button-label">Search</span>
-          </button>
+      <SearchHeader>
+        <SearchForm onSubmit={this.handleSubmit}>
+          <SearchFormButton type="submit" class="button">
+            <ButtonLabel>Search</ButtonLabel>
+          </SearchFormButton>
 
-          <input
-            class="input"
+          <FormInput
             type="text"
             autocomplete="off"
             autofocus
@@ -37,8 +37,8 @@ class Searchbar extends Component {
             onImput={this.handleChange}
             value = {this.state.quary}
           />
-        </form>
-        </header>
+        </SearchForm>
+        </SearchHeader>
       );
   }
 }

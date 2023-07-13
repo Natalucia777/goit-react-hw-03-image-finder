@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { ImgGalleryItem, ImgGalleryItemImg } from './ImageGalleryItem.styled';
 class ImageGalleryItem extends Component {
   render() {
     return (
-    <li class="gallery-item">
-      <img src={this.props.imageUrl} alt={this.props.id} />
-    </li>
+    <ImgGalleryItem>
+      <ImgGalleryItemImg src={this.props.imageUrl} alt={this.props.id} />
+    </ImgGalleryItem>
   );
   }
 }
