@@ -31,10 +31,10 @@ class Searchbar extends Component {
 
           <FormInput
             type="text"
-            autocomplete="off"
-            autofocus
+            autoComplete="off"
+            autoFocus
             placeholder="Search images and photos"
-            onImput={this.handleChange}
+            onChange={this.handleChange}
             value = {this.state.quary}
           />
         </SearchForm>

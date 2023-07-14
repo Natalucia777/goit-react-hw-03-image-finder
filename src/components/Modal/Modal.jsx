@@ -17,12 +17,11 @@ class Modal extends Component {
       return this.props.onClose();
     }
   };
-
   render() {
     return createPortal(
       <Overlay>
         <ModalImg>
-          <img src={this.props.pictures} alt="" />
+          <img src={this.props.imageUrl} alt="" />
         </ModalImg>
       </Overlay>,
       modalRoot
@@ -32,7 +31,7 @@ class Modal extends Component {
 
 Modal.propTypes = {
   onClose: PropTypes.func.isRequired,
-  pictures: PropTypes.string.isRequired,
+  imageUrl: PropTypes.string.isRequired,
 };
 
 export default Modal;

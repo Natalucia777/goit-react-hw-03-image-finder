@@ -1,9 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { FormButton } from './Button.styled';
-function Button ({onClick}){
+import { Btn } from './Button.styled';
+
+const Button = ({ onClick }) => {
     return (
-        <FormButton type="button" onClick={onClick}>Load more</FormButton>
+        <Btn type="button" onClick={onClick}>Load more</Btn>
     )
 }
 

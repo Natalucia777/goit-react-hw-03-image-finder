@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import shortid from 'shortid';
 import ImageGalleryItem from '../ImageGalleryItem/ImageGalleryItem';
 import Modal from '../Modal/Modal';
+import { ImageGalleryList } from './ImageGallery.styled';
 
 class ImageGallery extends Component {
   state = {
@@ -30,8 +31,7 @@ class ImageGallery extends Component {
     const { showModal, showImage } = this.state;
     return (
       <div>
-        <ul
-          class="gallery"
+        <ImageGalleryList
           onClick={this.toggleModal}>
           {this.props.pictures.map(img => {
             return (  
@@ -42,7 +42,7 @@ class ImageGallery extends Component {
               />
             );
           })}
-        </ul>
+        </ImageGalleryList>
         if ({showModal && showImage}) {
           <Modal onClose={this.toggleModal}  image={this.showImage } />
         }

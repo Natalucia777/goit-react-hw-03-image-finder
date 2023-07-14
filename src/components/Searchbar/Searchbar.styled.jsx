@@ -29,7 +29,7 @@ export const SearchForm = styled.form`
   overflow: hidden;
 `;
 
-export const FormInput = styled.form`
+export const FormInput = styled.input`
   display: inline-block;
   width: 100%;
   font: inherit;
