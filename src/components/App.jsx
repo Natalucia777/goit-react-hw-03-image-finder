@@ -4,7 +4,7 @@ import * as API from './api';
 import 'react-toastify/dist/ReactToastify.css';
 import Button from './Button/Button';
 import ImageGallery from './ImageGallery/ImageGallery';
-import Loader from './Loader/Loader';
+import { Loader } from './Loader/Loader';
 import Searchbar from './Searchbar/Searchbar';
 import { AppBox } from './App.styled';
 import { ErrorMessage, Text } from './App.styled';
