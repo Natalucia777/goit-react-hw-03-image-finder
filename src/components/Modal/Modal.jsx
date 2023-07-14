@@ -1,37 +1,44 @@
-import React, { Component } from 'react';
-//import Modal from 'react-modal';
-import { createPortal } from 'react-dom';
+import Modal from 'react-modal';
+import { disableBodyScroll, enableBodyScroll } from 'body-scroll-lock';
 import PropTypes from 'prop-types';
-import { Overlay, ModalImg } from './Modal.styled';
 
-const modalRoot = document.querySelector('#modalRoot');
-class Modal extends Component {
-  componentDidMount() {
-    window.addEventListener('keydown', this.handleKeyDown);
-  }
-  componentWillUnmount() {
-    window.removeEventListener('keydown', this.handleKeyDown);
-  }
-  handleKeyDown = e => {
-    if (e.code === 'Escape') {
-      return this.props.onClose();
-    }
-  };
-  render() {
-    return createPortal(
-      <Overlay>
-        <ModalImg>
-          <img src={this.props.imageUrl} alt="" />
-        </ModalImg>
-      </Overlay>,
-      modalRoot
-    );
-  }
-}
+const customStyles = {
+  content: {
+    width: '1000px',
+    border: 'none',
+    backgroundColor: 'transparent',
+    inset: 'auto',
+  },
+  overlay: {
+    position: 'fixed',
+    top: '0',
+    left: '0',
+    width: '100vw',
+    height: '100vh',
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: 'rgba(0, 0, 0, 0.8)',
+    zIndex: '1200',
+  },
+};
+Modal.setAppElement('#root');
 
-Modal.propTypes = {
-  onClose: PropTypes.func.isRequired,
-  imageUrl: PropTypes.string.isRequired,
+export const ModalImg = ({ image, closeModal, isModalOpen }) => {
+  return (
+    <Modal
+        isOpen={isModalOpen}
+        onRequestClose={closeModal}
+        style={customStyles}
+        onAfterOpen={() => disableBodyScroll(document)}
+        onAfterClose={() => enableBodyScroll(document)} >
+        <img src={image.largeImageURL} alt={image.tags} loading="lazy" />
+    </Modal>
+  );
 };
 
-export default Modal;
+ModalImg.propTypes = {
+  image: PropTypes.objectOf(PropTypes.string).isRequired,
+  closeModal: PropTypes.func.isRequired,
+  isModalOpen: PropTypes.bool.isRequired,
+};
