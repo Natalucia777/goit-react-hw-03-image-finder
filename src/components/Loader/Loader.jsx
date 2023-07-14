@@ -1,6 +1,7 @@
 import { ColorRing } from  'react-loader-spinner'
 
 export const Loader = () => {
+  
     return (
         <ColorRing
           visible={true}

@@ -22,6 +22,7 @@ const customStyles = {
     zIndex: '1200',
   },
 };
+
 Modal.setAppElement('#root');
 
 export const ModalImg = ({ image, closeModal, isModalOpen }) => {
