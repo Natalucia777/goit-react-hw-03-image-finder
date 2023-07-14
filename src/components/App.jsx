@@ -8,6 +8,7 @@ import Loader from './Loader/Loader';
 import Searchbar from './Searchbar/Searchbar';
 import { AppBox } from './App.styled';
 import { ErrorMessage, Text } from './App.styled';
+
 class App extends Component {
   state = {
     searchName: '',
