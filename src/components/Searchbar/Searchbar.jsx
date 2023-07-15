@@ -18,7 +18,7 @@ class Searchbar extends Component {
 
     if (this.state.searchName.trim() === '') {
       toast.error(
-        'The search string cannot be empty. Please specify your search query.',
+        'Please enter your search term.',
         { theme: 'colored' }
       );
       return;
@@ -43,7 +43,7 @@ class Searchbar extends Component {
             type="text"
             autoComplete="off"
             autoFocus
-            placeholder="Search images and photos"
+            placeholder="Search images."
             value={this.state.searchName}
             onChange={this.handleChange}
           />

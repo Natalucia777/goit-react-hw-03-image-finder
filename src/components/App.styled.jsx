@@ -7,7 +7,7 @@ export const AppBox = styled.div`
   padding-bottom: 24px;
 `;
 
-export const Text = styled.p`
+export const Text = styled.div`
   padding: 15px;
   text-align: center;
   font-size: 16px;
